@@ -2,6 +2,8 @@
 
 import pygame
 
+from config import load_font
+
 
 class LogOverlay:
     """Displays a scrollable log of previous dialogue lines."""
@@ -11,7 +13,7 @@ class LogOverlay:
         self.active = False
         self.entries: list[tuple[str, str]] = []
         self.scroll_offset = 0
-        self.font = pygame.font.Font(None, 26)
+        self.font = load_font(26)
         self.background = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
         self.background.fill((0, 0, 0, 220))
 

@@ -1,20 +1,8 @@
 """Dialogue box UI component with word wrap and input handling."""
 
-import os
 import pygame
 
-ASSETS_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
-FONTS_DIR = os.path.join(ASSETS_DIR, "fonts")
-
-
-def load_font(size: int) -> pygame.font.Font:
-    font_path = os.path.join(FONTS_DIR, "space_font.ttf")
-    if os.path.isfile(font_path):
-        try:
-            return pygame.font.Font(font_path, size)
-        except Exception:
-            pass
-    return pygame.font.Font(None, size)
+from config import load_font
 
 
 class DialogueBox:
@@ -39,8 +27,9 @@ class DialogueBox:
         self.lines: list[str] = []
         self.auto_mode = False
 
-        self.auto_button_rect = pygame.Rect(self.rect.right - 170, self.rect.top + 16, 150, 36)
-        self.log_button_rect = pygame.Rect(self.rect.right - 170, self.rect.top + 64, 150, 36)
+        # Button rects will be laid out based on the font size to adapt to different fonts.
+        self.auto_button_rect = pygame.Rect(0, 0, 0, 0)
+        self.log_button_rect = pygame.Rect(0, 0, 0, 0)
 
         self._prepare_surfaces()
 
@@ -84,15 +73,36 @@ class DialogueBox:
         # Future animations or transitions
         pass
 
+    def _layout_buttons(self) -> None:
+        """Compute button rects based on font metrics so they fit any font."""
+        padding_x = 16
+        padding_y = 10
+
+        auto_label = self.name_font.render("AUTO", True, (220, 220, 255))
+        log_label = self.name_font.render("LOG", True, (220, 220, 255))
+
+        auto_w = auto_label.get_width() + padding_x * 2
+        auto_h = auto_label.get_height() + padding_y * 2
+        log_w = log_label.get_width() + padding_x * 2
+        log_h = log_label.get_height() + padding_y * 2
+
+        # Position buttons in the top-right of the dialogue box, stacked vertically.
+        self.auto_button_rect.size = (auto_w, auto_h)
+        self.auto_button_rect.topleft = (self.rect.right - auto_w - 20, self.rect.top + 16)
+
+        self.log_button_rect.size = (log_w, log_h)
+        self.log_button_rect.topleft = (self.rect.right - log_w - 20, self.rect.top + 16 + auto_h + 12)
+
     def render(self) -> None:
         self.screen.blit(self.background_surf, self.rect.topleft)
 
         # Name plate
         if self.speaker:
-            plate_rect = pygame.Rect(self.rect.left + 24, self.rect.top - 36, 360, 40)
+            name_text = self.name_font.render(self.speaker, True, (230, 230, 255))
+            plate_width = max(360, name_text.get_width() + 24)
+            plate_rect = pygame.Rect(self.rect.left + 24, self.rect.top - 36, plate_width, 40)
             pygame.draw.rect(self.screen, (10, 10, 20, 220), plate_rect)
             pygame.draw.rect(self.screen, (80, 160, 220), plate_rect, 2)
-            name_text = self.name_font.render(self.speaker, True, (230, 230, 255))
             self.screen.blit(name_text, (plate_rect.left + 10, plate_rect.top + 8))
 
         # Dialogue text
@@ -103,6 +113,7 @@ class DialogueBox:
             text_y += self.font.get_linesize() + 4
 
         # Buttons
+        self._layout_buttons()
         self._render_button(self.auto_button_rect, "AUTO", self.auto_mode)
         self._render_button(self.log_button_rect, "LOG", False)
 

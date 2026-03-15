@@ -35,6 +35,42 @@
                 "text": "30 minutes later..."
             }
         ]
+    }, {
+        "id": "rin_finish_preparing",
+        "background": "Livingroom_Day.png",
+        "characters": [{
+            "name": "Rin", "position": "center", "expression": "happy"
+        }],
+        "dialogue": [
+            {
+                "speaker": "Rin",
+                "text": "I'm all set. Let's go!"
+            }
+        ]
+    }, {
+        "id": "rin_traveling",
+        "background": "Street_Spring_Day.png",
+        "characters": [{
+            "name": "Rin", "position": "center", "expression": "wondering"
+        }],
+        "dialogue": [
+            {
+                "speaker": "Rin",
+                "text": "This suppose to be where {player} live. But I don't really see him anywhere"
+            },
+            {
+                "speaker": "Rin",
+                "text": "Where can he be? I thought he said he will be waiting for me here."
+            },
+            {
+                "speaker": "{player}",
+                "text": "Hey Rin! I'm here!!"
+            },
+            {
+                "speaker": "{player}",
+                "text": "Sorry for making you wait! I forgot to set up the alarm and I woke up late. I was rushing to get ready and I just got here."
+            }
+        ]
     }
   ]
 }

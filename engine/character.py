@@ -6,6 +6,8 @@ from typing import Dict, List, Optional
 
 import pygame
 
+from config import load_font
+
 ASSETS_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 CHAR_DIR = os.path.join(ASSETS_DIR, "characters")
 
@@ -65,7 +67,7 @@ class CharacterSprite:
         surf.fill((0, 0, 0, 0))
         pygame.draw.rect(surf, (60, 120, 180), surf.get_rect(), border_radius=16)
         pygame.draw.rect(surf, (180, 220, 255), surf.get_rect(), 4, border_radius=16)
-        font = pygame.font.Font(None, 32)
+        font = load_font(32)
         text = font.render(self.data.name or "?", True, (230, 230, 255))
         surf.blit(text, (20, 20))
         return surf
