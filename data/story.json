@@ -68,7 +68,25 @@
             },
             {
                 "speaker": "{player}",
-                "text": "Sorry for making you wait! I forgot to set up the alarm and I woke up late. I was rushing to get ready and I just got here."
+                "text": "Sorry for making you wait! I forgot to set up the alarm and I woke up late. I was rushing to get ready and I just got here.",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "delighted"
+                },{
+                    "name": "Player", "position": "right", "expression": "sad"
+                }]
+            },
+            {
+                "speaker": "Rin",
+                "text": "Oh, it's okay. I thought you forgot about me or something. Glad you didn't."
+            },
+            {
+                "speaker": "{player}",
+                "text": "Ok, I'm really sorry about that. So should we going now?",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "delighted"
+                },{
+                    "name": "Player", "position": "right", "expression": "smile2"
+                }]
             }
         ]
     }
