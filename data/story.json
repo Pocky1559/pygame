@@ -1,35 +1,40 @@
 {
   "scenes": [
     {
-      "id": "intro",
-      "background": "space_station.png",
-      "characters": [
-        { "name": "Lyra", "position": "left", "expression": "neutral" }
-      ],
+      "id": "rin_wakeup",
+      "background": "Bedroom_Day.png",
+      "characters": [],
       "dialogue": [
         {
-          "speaker": "Lyra",
-          "text": "We've finally reached the edge of the known galaxy.",
-          "characters": [
-            { "name": "Lyra", "position": "left", "expression": "neutral" }
-          ]
-        },
-        {
-          "speaker": "Lyra",
-          "text": "Wait... something is out there.",
-          "characters": [
-            { "name": "Lyra", "position": "left", "expression": "surprised" }
-          ]
+          "speaker": "",
+          "text": "Rin woke up to the sound of her alarm clock."
         },
         {
           "speaker": "",
-          "text": "The stars stretched endlessly beyond the viewport."
+          "text": "It seem that she need to prepare to travel to another planet today."
         },
         {
-          "speaker": "Lyra",
-          "text": "The crew is counting on us to deliver the message to the outpost."
+          "speaker": "Rin",
+          "text": "It morning already? I really wanna sleep a little bit more.",
+          "characters": [
+            { "name": "Rin", "position": "center", "expression": "sleepy", "outfit": "pajamas" }
+          ]
+        },
+        {
+          "speaker": "Rin",
+          "text": "Let prepare myself for the trip then. Can't let {player} wait for me."
         }
       ]
+    }, {
+        "id": "narrator_transition",
+        "background": "Black.png",
+        "characters": [],
+        "dialogue": [
+            {
+                "speaker": "",
+                "text": "30 minutes later..."
+            }
+        ]
     }
   ]
 }

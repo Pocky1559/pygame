@@ -8,6 +8,7 @@ from engine.background import BackgroundRenderer
 from engine.character import CharacterManager
 from engine.dialogue_box import DialogueBox
 from engine.log_overlay import LogOverlay
+from engine.name_input import NameInputScreen
 
 DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "story.json")
 
@@ -24,6 +25,9 @@ class SceneManager:
         self.dialogue_box = DialogueBox(screen)
         self.log_overlay = LogOverlay(screen)
 
+        self.name_input = NameInputScreen(screen)
+        self.player_name: str | None = None
+
         self.auto_mode = False
         self.auto_timer = 0.0
         self.auto_delay = 2.5  # seconds per line in auto mode
@@ -31,8 +35,6 @@ class SceneManager:
         self.story = self.load_story(DATA_PATH)
         self.current_scene_index = 0
         self.current_line_index = 0
-
-        self.advance_line()  # Load the first line
 
     def load_story(self, path: str) -> dict:
         with open(path, "r", encoding="utf-8") as f:
@@ -78,11 +80,19 @@ class SceneManager:
 
         speaker = line.get("speaker", "")
         text = line.get("text", "")
+        speaker = self._format_player_name(speaker)
+        text = self._format_player_name(text)
+
         self.dialogue_box.set_line(speaker, text)
         self.log_overlay.add_entry(speaker, text)
 
         self.current_line_index += 1
         self.auto_timer = 0.0
+
+    def _format_player_name(self, raw: str) -> str:
+        if not self.player_name:
+            return raw
+        return raw.replace("{player}", self.player_name)
 
     def load_scene(self, scene: dict) -> None:
         """Load scene assets: background and characters."""
@@ -93,6 +103,14 @@ class SceneManager:
         self.characters.set_characters(characters)
 
     def handle_event(self, event: pygame.event.Event) -> None:
+        # If the name input screen is active, let it handle events first.
+        if not self.player_name:
+            self.name_input.handle_event(event)
+            if self.name_input.is_done():
+                self.player_name = self.name_input.get_name()
+                self.advance_line()
+            return
+
         if self.log_overlay.active:
             self.log_overlay.handle_event(event)
             return
@@ -121,6 +139,10 @@ class SceneManager:
         self.dialogue_box.set_auto(self.auto_mode)
 
     def update(self, dt: float) -> None:
+        if not self.player_name:
+            self.name_input.update(dt)
+            return
+
         if self.log_overlay.active:
             # Only update overlay when it's open
             self.log_overlay.update(dt)
@@ -135,6 +157,10 @@ class SceneManager:
                 self.advance_line()
 
     def render(self) -> None:
+        if not self.player_name:
+            self.name_input.render()
+            return
+
         self.background.render()
         self.characters.render()
         self.dialogue_box.render()

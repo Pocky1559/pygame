@@ -21,6 +21,7 @@ class CharacterData:
     name: str
     position: str
     expression: Optional[str]
+    outfit: Optional[str] = None
 
 
 class CharacterSprite:
@@ -39,10 +40,13 @@ class CharacterSprite:
         if not self.data.name:
             return None
 
-        filename = self.data.name
+        parts = [self.data.name]
+        if self.data.outfit:
+            parts.append(self.data.outfit)
         if self.data.expression:
-            filename = f"{filename}_{self.data.expression}"
-        filename = f"{filename}.png"
+            parts.append(self.data.expression)
+
+        filename = "_".join(parts) + ".png"
 
         path = os.path.join(CHAR_DIR, filename)
         if not os.path.isfile(path):
@@ -89,8 +93,9 @@ class CharacterManager:
             name = char.get("name", "")
             pos = char.get("position", "center")
             expr = char.get("expression")
+            outfit = char.get("outfit")
             key = pos
-            next_sprites[key] = CharacterSprite(CharacterData(name, pos, expr), self.screen)
+            next_sprites[key] = CharacterSprite(CharacterData(name, pos, expr, outfit), self.screen)
 
         self.sprites = next_sprites
 
