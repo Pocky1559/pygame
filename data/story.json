@@ -49,7 +49,7 @@
         ]
     }, {
         "id": "rin_traveling",
-        "background": "Street_Spring_Day.png",
+        "background": "Backstreet_Spring_Day.png",
         "characters": [{
             "name": "Rin", "position": "center", "expression": "wondering"
         }],
@@ -86,6 +86,135 @@
                     "name": "Rin", "position": "left", "expression": "delighted"
                 },{
                     "name": "Player", "position": "right", "expression": "smile2"
+                }]
+            }, {
+                "speaker": "Rin",
+                "text": "Yes, of course!",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "happy"
+                },{
+                    "name": "Player", "position": "right", "expression": "smile2"
+                }]
+            }
+        ]
+    },{
+        "id": "travel_to_spaceport",
+        "background": "Train_Day.png",
+        "characters": [],
+        "dialogue": [
+            {
+                "speaker": "",
+                "text": "Rin and {player} travel to the spaceport together."
+            },
+            {
+                "speaker": "Rin",
+                "text": "So what will you do after we reach that planet?",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "smile"
+                },{
+                    "name": "Player", "position": "right", "expression": "neutral"
+                }]
+            },
+            {
+                "speaker": "{player}",
+                "text": "Well I will probably go enjoy the culture, and environment there. I also heard there have really great food there"
+            },
+            {
+                "speaker": "Rin",
+                "text": "Hm, that does sound really good!",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "delighted"
+                },{
+                    "name": "Player", "position": "right", "expression": "neutral"
+                }]
+            },
+            {
+                "speaker": "Rin",
+                "text": "I doesn't have any plan yet. But I bet there will be a lot of interesting there!"
+            },
+            {
+                "speaker": "{player}",
+                "text": "Yeah, me too!!",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "delighted"
+                },{
+                    "name": "Player", "position": "right", "expression": "laugh"
+                }]
+            }
+        ]
+    },{
+        "id": "during_travel_to_spaceport",
+        "background": "Black.png",
+        "characters": [],
+        "dialogue": [
+            {
+                "speaker": "",
+                "text": "After a while..."
+            }
+        ]
+    },{
+        "id": "before_enter_spaceport",
+        "background": "Train_Night.png",
+        "characters": [{
+            "name": "Rin", "position": "left", "expression": "sleepy"
+        },{
+            "name": "Player", "position": "right", "expression": "straight"
+        }],
+        "dialogue": [
+            {
+                "speaker": "{player}",
+                "text": "Hm, we should be there by now"
+            },
+            {
+                "speaker": "{player}",
+                "text": "Oh wait, I think we are here now!",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "sleepy"
+                },{
+                    "name": "Player", "position": "right", "expression": "surprised"
+                }]
+            },
+            {
+                "speaker": "{player}",
+                "text": "Rin, wake up we already reach the spaceport (It like airport but for space)"
+            },
+            {
+                "speaker": "Rin",
+                "text": "Huh, we reach it already?",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "sleepy"
+                },{
+                    "name": "Player", "position": "right", "expression": "surprised"
+                }]
+            },
+            {
+                "speaker": "{player}",
+                "text": "Yeah, I think so. There! you can see the station over there!!!!!!"
+            },
+            {
+                "speaker": "Rin",
+                "text": "Oh wait, We actually is!!!!",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "surprised"
+                },{
+                    "name": "Player", "position": "right", "expression": "surprised"
+                }]
+            },
+            {
+                "speaker": "Rin",
+                "text": "Let go then, or else we might miss it entirely!",
+                "characters":[{
+                    "name": "Rin", "position": "left", "expression": "smile"
+                },{
+                    "name": "Player", "position": "right", "expression": "surprised"
+                }]
+            }, {
+                "speaker": "{player}",
+                "text": "OK!!!",
+                "characters": [{
+                    "name": "Rin", "position": "left", "expression": "smile"
+                },{
+                    "name": "Player", "position": "right", "expression": "neutral"
                 }]
             }
         ]
