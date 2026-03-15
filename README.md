@@ -10,6 +10,7 @@ A simple visual novel about space and two person that need to escape from the he
 Want to customize it? Check out [__how_to_edit_data.md__](how_to_edit_data.md) for the full editing guide.
 
 > ⚠️ Fair warning: most of this code is vibecoded. Read at your own risk.
+
 > ❗Story might get update in the future
 
 ## 🎮 How to start playing game
