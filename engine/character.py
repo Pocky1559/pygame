@@ -17,6 +17,10 @@ POSITIONS = {
     "right": 1060,
 }
 
+# Dialogue box sits at the bottom of the screen; characters should sit above it.
+DIALOGUE_BOX_HEIGHT_RATIO = 0.25
+BOTTOM_PADDING = 0
+
 
 @dataclass
 class CharacterData:
@@ -34,7 +38,9 @@ class CharacterSprite:
         self.data = data
         self.image = self._load_image() or self._placeholder_surface()
         self.rect = self.image.get_rect()
-        self.rect.midbottom = (POSITIONS.get(data.position, 640), screen.get_height() - 40)
+        # Anchor characters to the actual bottom of the window.
+        self.rect.bottom = screen.get_height()
+        self.rect.centerx = POSITIONS.get(data.position, 640)
         self.alpha = 255
         self.image.set_alpha(self.alpha)
 
