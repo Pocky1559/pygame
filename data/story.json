@@ -1,0 +1,35 @@
+{
+  "scenes": [
+    {
+      "id": "intro",
+      "background": "space_station.png",
+      "characters": [
+        { "name": "Lyra", "position": "left", "expression": "neutral" }
+      ],
+      "dialogue": [
+        {
+          "speaker": "Lyra",
+          "text": "We've finally reached the edge of the known galaxy.",
+          "characters": [
+            { "name": "Lyra", "position": "left", "expression": "neutral" }
+          ]
+        },
+        {
+          "speaker": "Lyra",
+          "text": "Wait... something is out there.",
+          "characters": [
+            { "name": "Lyra", "position": "left", "expression": "surprised" }
+          ]
+        },
+        {
+          "speaker": "",
+          "text": "The stars stretched endlessly beyond the viewport."
+        },
+        {
+          "speaker": "Lyra",
+          "text": "The crew is counting on us to deliver the message to the outpost."
+        }
+      ]
+    }
+  ]
+}
