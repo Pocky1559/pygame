@@ -33,6 +33,10 @@ def main() -> None:
         scene_manager.render()
         pygame.display.flip()
 
+        if getattr(scene_manager, "game_over", False) and getattr(scene_manager, "end_screen", None):
+            if scene_manager.end_screen.request_quit:
+                running = False
+
     pygame.quit()
 
 

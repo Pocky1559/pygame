@@ -41,7 +41,12 @@ class DialogueBox:
     def set_line(self, speaker: str, text: str) -> None:
         self.speaker = speaker
         self.text = text
-        self.lines = self._wrap_text(text, self.font, self.rect.width - 40)
+        self._layout_buttons()
+
+        # Ensure dialogue wraps before hitting the button region on the right.
+        right_margin = max(self.auto_button_rect.width, self.log_button_rect.width) + 20
+        max_text_width = self.rect.width - 40 - right_margin
+        self.lines = self._wrap_text(text, self.font, max_text_width)
 
     def set_auto(self, enabled: bool) -> None:
         self.auto_mode = enabled
@@ -70,8 +75,8 @@ class DialogueBox:
         pass
 
     def update(self, dt: float) -> None:
-        # Future animations or transitions
-        pass
+        # Keep UI layout updated (button positions, etc.)
+        self._layout_buttons()
 
     def _layout_buttons(self) -> None:
         """Compute button rects based on font metrics so they fit any font."""
@@ -105,7 +110,7 @@ class DialogueBox:
             pygame.draw.rect(self.screen, (80, 160, 220), plate_rect, 2)
             self.screen.blit(name_text, (plate_rect.left + 10, plate_rect.top + 8))
 
-        # Dialogue text
+        # Dialogue text (top-aligned)
         text_y = self.rect.top + 20
         for line in self.lines:
             rendered = self.font.render(line, True, (240, 240, 255))

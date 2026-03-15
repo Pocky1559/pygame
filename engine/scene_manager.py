@@ -7,6 +7,7 @@ import pygame
 from engine.background import BackgroundRenderer
 from engine.character import CharacterManager
 from engine.dialogue_box import DialogueBox
+from engine.end_screen import EndScreen
 from engine.log_overlay import LogOverlay
 from engine.name_input import NameInputScreen
 
@@ -36,6 +37,9 @@ class SceneManager:
         self.current_scene_index = 0
         self.current_line_index = 0
 
+        self.game_over = False
+        self.end_screen = EndScreen(screen)
+
     def load_story(self, path: str) -> dict:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -59,8 +63,9 @@ class SceneManager:
             self.current_scene_index += 1
             self.current_line_index = 0
             if self.current_scene_index >= len(self.story.get("scenes", [])):
-                # Loop back to start
-                self.current_scene_index = 0
+                # End of story
+                self.game_over = True
+                return
             scene = self.current_scene
             dialogue = scene.get("dialogue", [])
             self.load_scene(scene)
@@ -111,6 +116,10 @@ class SceneManager:
                 self.advance_line()
             return
 
+        if self.game_over:
+            self.end_screen.handle_event(event)
+            return
+
         if self.log_overlay.active:
             self.log_overlay.handle_event(event)
             return
@@ -125,12 +134,13 @@ class SceneManager:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                if self.dialogue_box.is_hovered(event.pos):
-                    self.advance_line()
-                elif self.dialogue_box.auto_button_rect.collidepoint(event.pos):
+                # Prioritize UI buttons before advancing dialogue via click
+                if self.dialogue_box.auto_button_rect.collidepoint(event.pos):
                     self.toggle_auto()
                 elif self.dialogue_box.log_button_rect.collidepoint(event.pos):
                     self.log_overlay.open()
+                elif self.dialogue_box.is_hovered(event.pos):
+                    self.advance_line()
 
         self.dialogue_box.handle_event(event)
 
@@ -141,6 +151,10 @@ class SceneManager:
     def update(self, dt: float) -> None:
         if not self.player_name:
             self.name_input.update(dt)
+            return
+
+        if self.game_over:
+            self.end_screen.update(dt)
             return
 
         if self.log_overlay.active:
@@ -159,6 +173,10 @@ class SceneManager:
     def render(self) -> None:
         if not self.player_name:
             self.name_input.render()
+            return
+
+        if self.game_over:
+            self.end_screen.render()
             return
 
         self.background.render()
