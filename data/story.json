@@ -218,6 +218,31 @@
                 }]
             }
         ]
+    },{
+        "id": "ending",
+        "background": "Black.png",
+        "characters": [],
+        "dialogue": [
+            {
+                "speaker": "",
+                "text": "This is all of the story that I have for now"
+            },{
+                "speaker": "",
+                "text": "Anyway I might add more if I feel like it :)"
+            },{
+                "speaker": "",
+                "text": "Thank you so much for playing!!!"
+            },{
+                "speaker": "Credits",
+                "text": "All assest used:"
+            },{
+                "speaker": "Credits",
+                "text": "Rin and Player: sutemo"
+            },{
+                "speaker": "Credits",
+                "text": "Background: Noraneko Games"
+            }
+        ]
     }
   ]
 }
